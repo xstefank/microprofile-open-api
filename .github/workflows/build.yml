@@ -20,5 +20,12 @@ jobs:
         with:
           java-version: ${{matrix.java}}
 
+      - name: Staging augmenter
+        run: |
+          wget https://github.com/xstefank/staging-augmenter/raw/main/staging-augmenter
+          chmod +x staging-augmenter
+          ./staging-augmenter
+          ls ~/.m2/settings.xml
+
       - name: build with maven
         run: mvn -B verify javadoc:javadoc --file pom.xml
